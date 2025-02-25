@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="flex grow">
+        <main class="grow content" id="content" role="content">
+            <div class="container-fixed py-3">
+                <div class="flex justify-between">
+                    <div>
+                        <ul>
+                            <li><a href="{% url 'home' %}" class="hover:text-primary">Home</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex gap-3 items-center">
+                        {% if request.user.is_authenticated %}
+                            <p>Welcome, <span class="uppercase font-semibold">{{ request.user.get_full_name }}</span></p> 
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="text-danger text-xl" title="logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+                            </form>
+                        {% else %}
+                            <ul class="flex gap-3">
+                                <li><a href="{% url 'login' %}" class="text-primary underline">Login</a></li>
+                                <li><a href="#">Register</a></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if messages %}
+                <div class="container-fixed">
+                    {% for message in messages %}
+                        <div class="bg-{{ message.tag }} p-2 mb-5 text-light ">
+                            {{ message }}
+                        </div>
+                    {% endfor %} 
+                </div>
+            {% endif %}
+            
+            
+            {% block content %}
+                
+            {% endblock content %}
+                
+        </main>
+    </div>
+{% endblock main %}
