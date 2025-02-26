@@ -6,8 +6,13 @@
     <div class="py-4 bg-gray-400">
         <h1 class="text-center font-semibold text-xl">Home</h1>
     </div>
-    <div class="container-fixed">
-        
+    <div class="container-fixed py-10">
+        {% comment %} <form method="post">
+            {% csrf_token %}
+            <input type="text" name="name" class="input mb-3" placeholder="Name">
+            <input type="email" name="email" class="input mb-3" placeholder="Email">
+            <button class="btn btn-primary">SEND</button>
+        </form> {% endcomment %}
     </div>
 
 {% endblock content %}
